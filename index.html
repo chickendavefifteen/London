@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#1b1d22">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231b1d22'/><text x='50%25' y='56%25' text-anchor='middle' font-size='42' fill='%23e9c36a' font-family='serif'>L</text></svg>">
+<title>London Tutor</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" defer></script>
+<script src="london-book.js" defer></script>
+<script src="engine.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="title">London Tutor</div>
+  <div class="mode-tabs" role="tablist">
+    <button class="tab active" data-mode="play" role="tab">Play</button>
+    <button class="tab" data-mode="learn" role="tab">Learn</button>
+    <button class="tab" data-mode="theory" role="tab">Theory</button>
+  </div>
+</header>
+
+<main id="main">
+  <section id="board-wrap">
+    <div id="status" class="status"></div>
+    <div id="board" class="board" aria-label="chess board"></div>
+    <div id="coach" class="coach"></div>
+    <div id="controls" class="controls">
+      <button id="btn-hint" class="btn">Hint</button>
+      <button id="btn-undo" class="btn">Undo</button>
+      <button id="btn-flip" class="btn">Flip</button>
+      <button id="btn-new"  class="btn primary">New</button>
+    </div>
+  </section>
+
+  <section id="panel-play" class="panel active">
+    <h2>Play the London</h2>
+    <p class="muted">You play White. The engine plays a variety of Black defenses so you can practice the full repertoire.</p>
+    <label class="row">
+      <span>Black plays</span>
+      <select id="opponent-line">
+        <option value="random">Surprise me</option>
+        <option value="kid">King's Indian setup (…Nf6 …g6)</option>
+        <option value="qgd">…d5 …e6 (QGD-like)</option>
+        <option value="slav">…d5 …c6 (Slav-like)</option>
+        <option value="c5">…c5 early (Benoni/queen's)</option>
+        <option value="bf5">…Bf5 Jobava-killer line</option>
+        <option value="dutch">…f5 (Dutch)</option>
+      </select>
+    </label>
+    <label class="row">
+      <span>Engine strength</span>
+      <select id="strength">
+        <option value="1">Club beginner</option>
+        <option value="2" selected>Intermediate</option>
+        <option value="3">Strong</option>
+      </select>
+    </label>
+    <label class="row">
+      <span>Coach hints</span>
+      <select id="coach-level">
+        <option value="full" selected>Full (book move + plan)</option>
+        <option value="nudge">Nudge only</option>
+        <option value="off">Off</option>
+      </select>
+    </label>
+    <div id="move-list" class="moves"></div>
+  </section>
+
+  <section id="panel-learn" class="panel">
+    <h2>Learn a line</h2>
+    <p class="muted">Step through main lines with explanations. Tap <b>Next</b> to play the recommended move.</p>
+    <label class="row">
+      <span>Lesson</span>
+      <select id="lesson-select"></select>
+    </label>
+    <div id="lesson-text" class="lesson-text"></div>
+    <div class="controls">
+      <button id="btn-back"  class="btn">Back</button>
+      <button id="btn-next"  class="btn primary">Next ▶</button>
+      <button id="btn-reset" class="btn">Restart</button>
+    </div>
+  </section>
+
+  <section id="panel-theory" class="panel">
+    <h2>London System — theory</h2>
+    <div id="theory-body" class="theory"></div>
+  </section>
+</main>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+  }
+</script>
+</body>
+</html>
