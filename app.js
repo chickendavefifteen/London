@@ -1,8 +1,8 @@
 /* London Tutor — UI and app glue. */
 (function(){
-  const GLYPH = { // Unicode chess pieces
-    wK:'\u2654', wQ:'\u2655', wR:'\u2656', wB:'\u2657', wN:'\u2658', wP:'\u2659',
-    bK:'\u265A', bQ:'\u265B', bR:'\u265C', bB:'\u265D', bN:'\u265E', bP:'\u265F'
+  const GLYPH = { // Always use the SOLID glyphs and color via CSS so white/black
+                  // render with consistent contrast on every phone font.
+    K:'\u265A', Q:'\u265B', R:'\u265C', B:'\u265D', N:'\u265E', P:'\u265F'
   };
   const FILES = ['a','b','c','d','e','f','g','h'];
   const RANKS = ['8','7','6','5','4','3','2','1'];
@@ -69,8 +69,8 @@
       const sq = FILES[f] + RANKS[r];
       const el = squareEl(sq);
       const span = document.createElement('span');
-      span.className = 'p';
-      span.textContent = GLYPH[p.color + p.type.toUpperCase()];
+      span.className = 'p ' + (p.color === 'w' ? 'pw' : 'pb');
+      span.textContent = GLYPH[p.type.toUpperCase()];
       el.appendChild(span);
     }
     // highlight last move
