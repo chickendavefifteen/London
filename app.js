@@ -1,8 +1,12 @@
 /* London Tutor — UI and app glue. */
 (function(){
-  const GLYPH = { // Always use the SOLID glyphs and color via CSS so white/black
-                  // render with consistent contrast on every phone font.
-    K:'\u265A', Q:'\u265B', R:'\u265C', B:'\u265D', N:'\u265E', P:'\u265F'
+  // Solid chess glyphs + VS15 (U+FE0E) to force text-style rendering on iOS.
+  // Without VS15, U+265F (black pawn) falls back to Apple Color Emoji which
+  // ignores CSS color/stroke, so every pawn renders black regardless of side.
+  const VS = '\uFE0E';
+  const GLYPH = {
+    K:'\u265A'+VS, Q:'\u265B'+VS, R:'\u265C'+VS,
+    B:'\u265D'+VS, N:'\u265E'+VS, P:'\u265F'+VS
   };
   const FILES = ['a','b','c','d','e','f','g','h'];
   const RANKS = ['8','7','6','5','4','3','2','1'];
