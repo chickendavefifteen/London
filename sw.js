@@ -1,6 +1,6 @@
 /* London Tutor — offline cache. Cache core assets on install, then serve
  * cache-first with network fallback so the app works on the subway. */
-const CACHE = 'london-tutor-v2';
+const CACHE = 'london-tutor-v3';
 const ASSETS = [
   './',
   './index.html',

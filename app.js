@@ -332,13 +332,15 @@
   }
   function renderLessonCoach(){
     if (!lesson) return;
-    if (lessonIdx >= lesson.steps.length){
-      coachEl.innerHTML = '<b>Lesson complete!</b> Tap Restart or pick another lesson.';
+    const n = lesson.steps.length;
+    if (lessonIdx >= n){
+      coachEl.innerHTML = '<b>Lesson complete! ('+n+'/'+n+')</b> Tap Restart or pick another lesson above.';
       return;
     }
     const [san, speaker, text] = lesson.steps[lessonIdx];
     const who = speaker === 'w' ? 'You (White)' : speaker === 'b' ? 'Black' : 'Note';
-    coachEl.innerHTML = '<b>' + who + ':</b> ' + (san ? '<b>' + san + '</b> — ' : '') + (text || '');
+    const prog = '<span class="muted">Step '+(lessonIdx+1)+'/'+n+'</span>';
+    coachEl.innerHTML = prog + ' <b>' + who + ':</b> ' + (san ? '<b>' + san + '</b> — ' : '') + (text || '');
   }
   function lessonNext(){
     if (!lesson || lessonIdx >= lesson.steps.length) return;
@@ -369,13 +371,13 @@
   /* ---------- MODE SWITCHING ---------- */
   function setMode(m){
     mode = m;
+    document.body.className = 'mode-' + m;
     for (const t of document.querySelectorAll('.tab')) t.classList.toggle('active', t.dataset.mode === m);
     $('panel-play').classList.toggle('active', m === 'play');
     $('panel-learn').classList.toggle('active', m === 'learn');
     $('panel-theory').classList.toggle('active', m === 'theory');
     if (m === 'play'){ if (!game || game.history().length === 0) newGame(); else render(); }
     if (m === 'learn'){ if (!lesson) loadLessons(); else startLesson(lesson.id); }
-    if (m === 'theory'){ /* static */ }
   }
 
   /* ---------- INIT ---------- */
@@ -406,7 +408,7 @@
     // Theory tab content
     $('theory-body').innerHTML = window.LONDON_THEORY;
     loadLessons();
-    setMode('play');
+    setMode('learn');
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

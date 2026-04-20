@@ -19,26 +19,32 @@
 <header class="topbar">
   <div class="title">London Tutor</div>
   <div class="mode-tabs" role="tablist">
-    <button class="tab active" data-mode="play" role="tab">Play</button>
-    <button class="tab" data-mode="learn" role="tab">Learn</button>
+    <button class="tab active" data-mode="learn" role="tab">Learn</button>
+    <button class="tab" data-mode="play" role="tab">Play</button>
     <button class="tab" data-mode="theory" role="tab">Theory</button>
   </div>
 </header>
 
 <main id="main">
   <section id="board-wrap">
+    <div id="learn-bar" class="learn-bar">
+      <select id="lesson-select" aria-label="Choose lesson"></select>
+    </div>
     <div id="status" class="status"></div>
     <div id="board" class="board" aria-label="chess board"></div>
     <div id="coach" class="coach"></div>
     <div id="controls" class="controls">
-      <button id="btn-hint" class="btn">Hint</button>
-      <button id="btn-undo" class="btn">Undo</button>
-      <button id="btn-flip" class="btn">Flip</button>
-      <button id="btn-new"  class="btn primary">New</button>
+      <button id="btn-hint"  class="btn play-only">Hint</button>
+      <button id="btn-undo"  class="btn play-only">Undo</button>
+      <button id="btn-back"  class="btn learn-only">◀ Back</button>
+      <button id="btn-next"  class="btn learn-only primary">Next ▶</button>
+      <button id="btn-reset" class="btn learn-only">Restart</button>
+      <button id="btn-flip"  class="btn">Flip</button>
+      <button id="btn-new"   class="btn play-only primary">New</button>
     </div>
   </section>
 
-  <section id="panel-play" class="panel active">
+  <section id="panel-play" class="panel">
     <h2>Play the London</h2>
     <p class="muted">You play White. The engine plays a variety of Black defenses so you can practice the full repertoire.</p>
     <label class="row">
@@ -74,17 +80,8 @@
 
   <section id="panel-learn" class="panel">
     <h2>Learn a line</h2>
-    <p class="muted">Step through main lines with explanations. Tap <b>Next</b> to play the recommended move.</p>
-    <label class="row">
-      <span>Lesson</span>
-      <select id="lesson-select"></select>
-    </label>
+    <p class="muted">Step through main lines with explanations. The current move and its reasoning are shown in the coach panel under the board. Use the buttons to advance.</p>
     <div id="lesson-text" class="lesson-text"></div>
-    <div class="controls">
-      <button id="btn-back"  class="btn">Back</button>
-      <button id="btn-next"  class="btn primary">Next ▶</button>
-      <button id="btn-reset" class="btn">Restart</button>
-    </div>
   </section>
 
   <section id="panel-theory" class="panel">
