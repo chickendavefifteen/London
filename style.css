@@ -46,7 +46,10 @@ main{max-width:640px;margin:0 auto;padding:10px 10px 28px}
   background:#0006;z-index:1}
 .sq.cap::before{content:"";position:absolute;inset:6%;border-radius:50%;
   border:4px solid #0007;background:transparent;z-index:1}
-.sq.hint::after{content:"";position:absolute;inset:0;background:var(--hint)}
+.sq.hint-from::after{content:"";position:absolute;inset:0;background:var(--hint);
+  box-shadow:inset 0 0 0 3px #2fa05988}
+.sq.hint-to::after{content:"";position:absolute;inset:0;background:transparent;
+  box-shadow:inset 0 0 0 4px #2fa059;border-radius:2px}
 .sq .p{pointer-events:none;position:relative;z-index:2;
   /* Serif fallback avoids Apple Color Emoji replacing glyphs on iOS. */
   font-family:"Times New Roman","DejaVu Serif","Noto Serif",Georgia,serif;

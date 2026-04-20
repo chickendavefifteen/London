@@ -1,7 +1,7 @@
 /* London Tutor — network-first cache. Always tries the network so code
  * changes propagate on the next page load; falls back to the most recent
  * cached copy only when offline. */
-const CACHE = 'london-tutor-v5';
+const CACHE = 'london-tutor-v6';
 
 self.addEventListener('install', (e) => { self.skipWaiting(); });
 

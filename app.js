@@ -60,11 +60,24 @@
     }
   }
 
+  // In Learn mode, show the expected move's from/to as a preview hint
+  // so the user sees what Next will play before tapping.
+  function updateLearnPreview(){
+    if (mode !== 'learn') return;
+    hintSquare = null;
+    if (!lesson || lessonIdx >= lesson.steps.length) return;
+    const [san] = lesson.steps[lessonIdx];
+    if (!san) return;
+    const mv = game.moves({ verbose:true }).find(x => x.san === san);
+    if (mv) hintSquare = { from: mv.from, to: mv.to };
+  }
+
   function render(){
+    updateLearnPreview();
     const b = game.board();
     // clear piece spans + marker classes, keep coords
     for (const el of boardEl.children){
-      el.classList.remove('sel','hl','dot','cap','hint');
+      el.classList.remove('sel','hl','dot','cap','hint-from','hint-to');
       const p = el.querySelector('.p'); if (p) p.remove();
     }
     // place pieces
@@ -93,8 +106,8 @@
       }
     }
     if (hintSquare){
-      squareEl(hintSquare.from)?.classList.add('hint');
-      squareEl(hintSquare.to)?.classList.add('hint');
+      squareEl(hintSquare.from)?.classList.add('hint-from');
+      squareEl(hintSquare.to)?.classList.add('hint-to');
     }
     renderStatus();
     renderMoves();
