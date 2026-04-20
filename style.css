@@ -1,7 +1,7 @@
 :root{
   --bg:#0f1115; --panel:#1a1d25; --ink:#eef1f7; --muted:#a6afc0;
   --accent:#f0c858; --accent-ink:#0f1115;
-  --light:#eedfc0; --dark:#6a8e5d; --hl:#f6d66ea6; --hint:#7bd889a6;
+  --light:#eedfc0; --dark:#6a8e5d; --hl:#f6d66ea6; --hint:#f6d66ea6;
   --danger:#ef6b6b; --ok:#7bd889;
   --border:#2a2f3b;
   --pw-fill:#f7f2e4; --pw-stroke:#111;
@@ -46,10 +46,8 @@ main{max-width:640px;margin:0 auto;padding:10px 10px 28px}
   background:#0006;z-index:1}
 .sq.cap::before{content:"";position:absolute;inset:6%;border-radius:50%;
   border:4px solid #0007;background:transparent;z-index:1}
-.sq.hint-from::after{content:"";position:absolute;inset:0;background:var(--hint);
-  box-shadow:inset 0 0 0 3px #2fa05988}
-.sq.hint-to::after{content:"";position:absolute;inset:0;background:transparent;
-  box-shadow:inset 0 0 0 4px #2fa059;border-radius:2px}
+.sq.hint-from::after,.sq.hint-to::after{content:"";position:absolute;inset:0;
+  background:var(--hint);box-shadow:inset 0 0 0 3px var(--accent)}
 .sq .p{pointer-events:none;position:relative;z-index:2;
   /* Serif fallback avoids Apple Color Emoji replacing glyphs on iOS. */
   font-family:"Times New Roman","DejaVu Serif","Noto Serif",Georgia,serif;
